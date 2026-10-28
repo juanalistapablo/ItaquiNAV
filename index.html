@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ItaquiNav — Painel de Fila e Status de Navios (Porto do Itaqui)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <div>
+        <h1>ItaquiNav — Controle de Fila Portuária</h1>
+        <p class="subtitulo">Gestão de Navios Esperados, Fundeados e Atracados no Porto do Itaqui (São Luís - MA)</p>
+      </div>
+      <span class="selo-porto">Baseado nos dados operacionais da EMAP</span>
+    </div>
+  </header>
+
+  <main class="container principal">
+    <!-- Seção 1: Campo de Entrada e Botão -->
+    <section class="painel-cadastro" aria-labelledby="titulo-cadastro">
+      <div class="cabecalho-secao">
+        <h2 id="titulo-cadastro">Registrar Nova Embarcação</h2>
+        <button type="button" id="btn-restaurar" class="btn-secundario" title="Recarregar navios de exemplo do artigo da EMAP">
+          Restaurar Dados da EMAP
+        </button>
+      </div>
+
+      <form id="form-navio" novalidate>
+        <div class="grade-campos">
+          <div class="campo-grupo">
+            <label for="input-nome">Nome do Navio *</label>
+            <input type="text" id="input-nome" placeholder="Ex: VITA UNITY" autocomplete="off">
+          </div>
+
+          <div class="campo-grupo">
+            <label for="input-imo">Código IMO (opcional)</label>
+            <input type="text" id="input-imo" placeholder="Ex: 9901275" autocomplete="off">
+          </div>
+
+          <div class="campo-grupo">
+            <label for="input-carga">Carga e Tonelagem *</label>
+            <input type="text" id="input-carga" placeholder="Ex: Soja - 65.000t" autocomplete="off">
+          </div>
+
+          <div class="campo-grupo">
+            <label for="input-calado">Calado em metros (m) *</label>
+            <input type="number" id="input-calado" step="0.1" min="1" max="25" placeholder="Ex: 11.5">
+          </div>
+
+          <div class="campo-grupo">
+            <label for="input-agencia">Agência Marítima</label>
+            <input type="text" id="input-agencia" placeholder="Ex: FERTIMPORT / LACHMANN" autocomplete="off">
+          </div>
+
+          <div class="campo-grupo">
+            <label for="select-status">Status Inicial na Fila *</label>
+            <select id="select-status">
+              <option value="esperado">1. Esperado (Em Trânsito)</option>
+              <option value="fundeado">2. Fundeado (Na Fila de Espera)</option>
+              <option value="atracado">3. Atracado (Operando no Berço)</option>
+            </select>
+          </div>
+        </div>
+
+        <p id="mensagem-feedback" class="mensagem-alerta oculto" role="alert"></p>
+
+        <div class="acoes-formulario">
+          <button type="submit" id="btn-registrar" class="btn-primario">
+            Registrar Navio no Painel
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Seção 2: Área de Resultado (Indicadores e Filas) -->
+    <section class="painel-resultados" aria-labelledby="titulo-resultados" aria-live="polite">
+      <div class="cabecalho-resultados">
+        <h2 id="titulo-resultados">Painel Operacional de Embarcações</h2>
+        <div class="barra-busca">
+          <label for="input-filtro" class="sr-only">Filtrar por navio ou carga</label>
+          <input type="search" id="input-filtro" placeholder="Filtrar por nome, carga ou agência...">
+        </div>
+      </div>
+
+      <div class="resumo-indicadores">
+        <div class="card-indicador">
+          <span class="rotulo-indicador">Total Monitorado</span>
+          <strong id="contador-total" class="valor-indicador">0</strong>
+        </div>
+        <div class="card-indicador indicador-esperado">
+          <span class="rotulo-indicador">Esperados</span>
+          <strong id="contador-esperados" class="valor-indicador">0</strong>
+        </div>
+        <div class="card-indicador indicador-fundeado">
+          <span class="rotulo-indicador">Fundeados (Na Fila)</span>
+          <strong id="contador-fundeados" class="valor-indicador">0</strong>
+        </div>
+        <div class="card-indicador indicador-atracado">
+          <span class="rotulo-indicador">Atracados (Berços)</span>
+          <strong id="contador-atracados" class="valor-indicador">0</strong>
+        </div>
+      </div>
+
+      <div class="grade-filas">
+        <!-- Coluna 1: Esperados -->
+        <div class="coluna-fila coluna-esperado">
+          <div class="topo-coluna">
+            <h3>1. Navios Esperados</h3>
+            <span class="descricao-coluna">Previsão de chegada à Baía de São Marcos</span>
+          </div>
+          <ul id="lista-esperados" class="lista-navios"></ul>
+        </div>
+
+        <!-- Coluna 2: Fundeados -->
+        <div class="coluna-fila coluna-fundeado">
+          <div class="topo-coluna">
+            <h3>2. Navios Fundeados (Fila)</h3>
+            <span class="descricao-coluna">Aguardando janela de maré e liberação de berço</span>
+          </div>
+          <ul id="lista-fundeados" class="lista-navios"></ul>
+        </div>
+
+        <!-- Coluna 3: Atracados -->
+        <div class="coluna-fila coluna-atracado">
+          <div class="topo-coluna">
+            <h3>3. Navios Atracados</h3>
+            <span class="descricao-coluna">Em operação de carga/descarga nos berços</span>
+          </div>
+          <ul id="lista-atracados" class="lista-navios"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>Universidade Federal do Maranhão (UFMA) · Engenharia da Computação · Desenvolvimento de Sistemas Web (EECP0036)</p>
+      <p class="rodape-nota">Dados baseados no estudo sobre logística portuária no Porto do Itaqui (Dantas et al., 2023 / Sistema Porto Agora EMAP).</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
