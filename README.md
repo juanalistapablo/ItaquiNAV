@@ -53,3 +53,4 @@ A captura da aba Rede (*Network*) mostra a requisição HTTP `GET` enviada pelo 
   1. Análise do artigo científico sobre os gargalos logísticos do Porto do Itaqui (*Dantas et al., 2023*) para escolha do problema e extração dos dados reais das tabelas de navios da EMAP.
   2. Planejamento da arquitetura em camadas (HTML/CSS/JS separados) e estruturação inicial do código seguindo as restrições da atividade (uso estrito de `textContent`, validação de campo vazio e persistência em `localStorage`).
 * **O que foi revisado e adaptado pelo aluno:** revisão completa da lógica de mudança de status das embarcações, testes de validação com campos em branco, verificação de responsividade e captura/análise da requisição HTTP na aba Rede no ambiente local.
+# ItaquiNAV
