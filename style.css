@@ -1,0 +1,430 @@
+:root {
+  --cor-marinho: #0f2942;
+  --cor-marinho-claro: #1b4965;
+  --cor-fundo: #f4f7f9;
+  --cor-branco: #ffffff;
+  --cor-texto: #1e293b;
+  --cor-texto-suave: #64748b;
+  --cor-borda: #cbd5e1;
+
+  --cor-esperado: #0284c7;
+  --cor-esperado-fundo: #f0f9ff;
+  --cor-fundeado: #d97706;
+  --cor-fundeado-fundo: #fffbeb;
+  --cor-atracado: #15803d;
+  --cor-atracado-fundo: #f0fdf4;
+  --cor-perigo: #dc2626;
+  --cor-perigo-fundo: #fef2f2;
+
+  --sombra-suave: 0 2px 6px rgba(15, 41, 66, 0.08);
+  --raio-borda: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Cabeçalho */
+.cabecalho {
+  background: linear-gradient(135deg, var(--cor-marinho), var(--cor-marinho-claro));
+  color: var(--cor-branco);
+  padding: 20px 0;
+  box-shadow: var(--sombra-suave);
+}
+
+.cabecalho-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.cabecalho h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.subtitulo {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.selo-porto {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Conteúdo Principal */
+.principal {
+  flex: 1;
+  padding-top: 24px;
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Painel de Cadastro */
+.painel-cadastro,
+.painel-resultados {
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda);
+  padding: 20px;
+  box-shadow: var(--sombra-suave);
+}
+
+.cabecalho-secao,
+.cabecalho-resultados {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cabecalho-secao h2,
+.cabecalho-resultados h2 {
+  font-size: 1.2rem;
+  color: var(--cor-marinho);
+}
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.campo-grupo label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.campo-grupo input,
+.campo-grupo select,
+.barra-busca input {
+  padding: 10px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: var(--cor-branco);
+  color: var(--cor-texto);
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus,
+.barra-busca input:focus {
+  outline: 2px solid var(--cor-esperado);
+  border-color: transparent;
+}
+
+.acoes-formulario {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Botões */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+.btn-primario {
+  background-color: var(--cor-marinho);
+  color: var(--cor-branco);
+  border: none;
+  padding: 11px 20px;
+  font-size: 0.95rem;
+}
+
+.btn-primario:hover {
+  background-color: var(--cor-marinho-claro);
+}
+
+.btn-secundario {
+  background-color: transparent;
+  color: var(--cor-marinho);
+  border: 1px solid var(--cor-marinho);
+  padding: 7px 12px;
+  font-size: 0.82rem;
+}
+
+.btn-secundario:hover {
+  background-color: var(--cor-fundo);
+}
+
+/* Mensagens de Feedback / Validação */
+.mensagem-alerta {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.mensagem-erro {
+  background-color: var(--cor-perigo-fundo);
+  color: var(--cor-perigo);
+  border: 1px solid #fca5a5;
+}
+
+.mensagem-sucesso {
+  background-color: var(--cor-atracado-fundo);
+  color: var(--cor-atracado);
+  border: 1px solid #86efac;
+}
+
+.oculto {
+  display: none;
+}
+
+/* Indicadores */
+.resumo-indicadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.card-indicador {
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+}
+
+.indicador-esperado {
+  border-left: 4px solid var(--cor-esperado);
+}
+
+.indicador-fundeado {
+  border-left: 4px solid var(--cor-fundeado);
+}
+
+.indicador-atracado {
+  border-left: 4px solid var(--cor-atracado);
+}
+
+.rotulo-indicador {
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+}
+
+.valor-indicador {
+  font-size: 1.5rem;
+  color: var(--cor-marinho);
+}
+
+/* Colunas das Filas (Kanban Portuário Responsivo) */
+.grade-filas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.coluna-fila {
+  border-radius: var(--raio-borda);
+  padding: 14px;
+  border: 1px solid var(--cor-borda);
+}
+
+.coluna-esperado {
+  background-color: var(--cor-esperado-fundo);
+  border-top: 4px solid var(--cor-esperado);
+}
+
+.coluna-fundeado {
+  background-color: var(--cor-fundeado-fundo);
+  border-top: 4px solid var(--cor-fundeado);
+}
+
+.coluna-atracado {
+  background-color: var(--cor-atracado-fundo);
+  border-top: 4px solid var(--cor-atracado);
+}
+
+.topo-coluna {
+  margin-bottom: 12px;
+}
+
+.topo-coluna h3 {
+  font-size: 1.05rem;
+  color: var(--cor-marinho);
+}
+
+.descricao-coluna {
+  font-size: 0.78rem;
+  color: var(--cor-texto-suave);
+}
+
+.lista-navios {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Cartão Individual de Navio */
+.cartao-navio {
+  background-color: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.topo-cartao {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.nome-navio {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cor-marinho);
+}
+
+.imo-navio {
+  font-size: 0.75rem;
+  color: var(--cor-texto-suave);
+  background-color: var(--cor-fundo);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.detalhe-item {
+  font-size: 0.85rem;
+  color: var(--cor-texto);
+}
+
+.alerta-mare {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #9a3412;
+  background-color: #ffedd5;
+  border: 1px solid #fdba74;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-top: 2px;
+}
+
+.acoes-cartao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--cor-fundo);
+}
+
+.btn-acao {
+  flex: 1;
+  padding: 6px 8px;
+  font-size: 0.78rem;
+  border: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+.btn-avancar {
+  background-color: var(--cor-marinho);
+  color: var(--cor-branco);
+  border-color: var(--cor-marinho);
+}
+
+.btn-remover {
+  color: var(--cor-perigo);
+  border-color: #fecaca;
+  background-color: var(--cor-perigo-fundo);
+  flex: 0 0 auto;
+}
+
+.item-vazio {
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+  text-align: center;
+  padding: 16px 8px;
+  font-style: italic;
+}
+
+/* Rodapé */
+.rodape {
+  background-color: var(--cor-marinho);
+  color: var(--cor-branco);
+  padding: 16px 0;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.rodape-nota {
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .acoes-formulario .btn-primario,
+  .barra-busca,
+  .barra-busca input {
+    width: 100%;
+  }
+}
